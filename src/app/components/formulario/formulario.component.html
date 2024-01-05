@@ -1,0 +1,17 @@
+<div class="container py-5">
+  <form #form="ngForm" class="form row align-items-center ">
+      <div class="col-5">
+        <input type="text"  class="form-control mb-2" id="titulo" name="titulo" ngModel #titulo="ngModel" placeholder="Título da tarefa" required/>
+        <p class="alert" *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)">Campo Obrigatório</p>
+      </div>
+      <div class="col-5">
+        <input type="date"  class="form-control mb-2" id="data" name="data" ngModel #data="ngModel" />
+      </div>
+      <div class="button  col-2">
+        <Button [disabled]="!form.valid" (click)="adicionar(form)" class="btn btn-dark">Adicionar</Button>
+      </div>
+      
+  </form>
+
+  <hr>
+</div>

@@ -1,0 +1,45 @@
+<app-formulario (carregar)="onClick()"></app-formulario>
+
+<div class="container">
+  <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Título</th>
+            <th scope="col">Data</th>
+            <th scope="col">Status</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tarefa of tarefas">
+            <th scope="row">{{ tarefa.titulo }}</th>
+            <td>{{ formatarData(tarefa.data) }}</td>
+
+            <td> 
+              <div class="status" [ngClass]="{'em-progresso': tarefa.status == 1, 
+              'concluida': tarefa.status == 2, 
+              'pausada': tarefa.status == 3}">
+                <p *ngIf="tarefa.status == 1"> Em progresso </p>
+                <p *ngIf="tarefa.status == 2"> Concluida </p>
+                <p *ngIf="tarefa.status == 3"> Pausada </p>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                <ul class="dropdown-menu">
+
+                  <li  *ngIf="tarefa.status != 2"><a class="dropdown-item" (click)="atualizar(tarefa, 2)">Concluir</a></li>
+                  <li *ngIf="tarefa.status == 1"><a class="dropdown-item" (click)="atualizar(tarefa, 3)">Pausar</a></li>
+                  <li *ngIf="tarefa.status != 1"><a class="dropdown-item" (click)="atualizar(tarefa, 1)">Retomar</a></li>
+                  <div class="dropdown-divider"></div>
+                  <li><a class="dropdown-item" (click)="delete(tarefa)">Excluir</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
